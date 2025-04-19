@@ -1,0 +1,34 @@
+/*
+ * PORTS.h
+ *
+ * Created: 28/10/2024 11:31:31
+ *  Author: miria
+ */ 
+
+
+#ifndef PORTS_H_
+#define PORTS_H_
+
+#include <avr/io.h>
+
+#define GPIO_0_mode	DDRD
+#define GPIO_0_in	PIND
+#define GPIO_0_out	PORTD
+
+#define  GREEN_LED	4
+#define	 RED_LED	3
+#define	 PUSHBUTTON	2
+#define	 PRESSED	0
+
+static inline void GPIO_init(){
+	//--------------------------------------------
+	//	1. Set pin as output for the LED
+	GPIO_0_mode	 |= (1<<RED_LED);
+	GPIO_0_mode	 |= (1<<GREEN_LED);
+	//---------------------------------------------
+	/// 2. Enable pull-up for the PUSHBUTTON
+	GPIO_0_out	 |= (1<<PUSHBUTTON);
+	//---------------------------------------------
+}
+
+#endif /* PORTS_H_ */
