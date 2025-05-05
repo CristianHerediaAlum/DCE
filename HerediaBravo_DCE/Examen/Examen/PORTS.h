@@ -15,20 +15,18 @@
 #define GPIO_0_in	PIND
 #define GPIO_0_out	PORTD
 
-#define	 FIRST_LED_PIN 4
-#define	 SECOND_LED_PIN 5
-#define	 THIRD_LED_PIN 6
-#define	 LAST_LED_PIN 7
-#define	 PUSHBUTTON	2
-#define	 PRESSED	0
+#define BUTTON_INTRO PORTD3
+#define BUTTON_MODE PORTD2
+#define	LED_MODE PORTB0
+#define LED_LIGHT PORTB1
 
 static inline void GPIO_init(){
 	//--------------------------------------------
 	//	1. Set pin as output for the LED
-	GPIO_0_mode	 |= (1<<FIRST_LED_PIN) | (1<<SECOND_LED_PIN) | (1 << THIRD_LED_PIN) | (1 << LAST_LED_PIN);
+	PORTB |= (1 << LED_MODE) | (1 << LED_LIGHT);
 	//---------------------------------------------
 	/// 2. Enable pull-up for the PUSHBUTTON
-	GPIO_0_out	 |= (1<<PUSHBUTTON);
+	GPIO_0_out	 |= (1<<BUTTON_INTRO) | (1 << BUTTON_MODE);
 	//---------------------------------------------
 }
 

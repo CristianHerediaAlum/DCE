@@ -25,11 +25,11 @@ ISR(INT0_vect) {
 	}
 }
 
-ISR(USART_RX_vect) {
-	// uint8_t data = USART0_getchar();
+ ISR(USART_RX_vect) {
+	 uint8_t data = USART0_getchar();
 	// USART0_putchar(data);
 	// // Mantenemos lo que habia en los 3 bits anteriores
-	// PORTD = (PORTD & 0x0F) | ((data & 0x0F) << 3);
+	 PORTD = (PORTD & 0x0F) | ((data & 0x0F) << 4);
 	// PORTD = (data << 4);
 }
 
@@ -47,8 +47,8 @@ int main(void)
     /* Replace with your application code */
 	while (1) 
 	{
-	   uint8_t data = USART0_getchar();
-	   USART0_putchar(data);
+//	   uint8_t data = USART0_getchar();
+	//   USART0_putchar(data);
 	   // Mantenemos lo que habia en los 3 bits anteriores
 	   // PORTD = (PORTD & 0x0F) | ((data & 0x0F) << 3);
    }

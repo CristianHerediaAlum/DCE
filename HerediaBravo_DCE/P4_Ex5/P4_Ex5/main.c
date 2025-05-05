@@ -13,9 +13,29 @@
 #include "../../DCE_libraries/EXT_INT.h"
 #include "../../DCE_libraries/MACROS.h"
 
+volatile char *message = "Hello world\n\r";
+volatile uint8_t tx_index = 0;
+
 ISR(INT0_vect) {
-	USART0_putString("Hello world\r\n");
+	// Parte a)
+	// USART0_putString("Hello world\r\n");
+	// Parte b)
+	tx_index = 0;
+	 //UDR0 = message[tx_index];
+	//tx_index++;
+	USART_TX_enable();
 }
+
+ISR(USART_UDRE_vect) {
+	if (message[tx_index] != '\0') {
+		USART0_putchar(message[tx_index]);
+		tx_index++;
+	}
+	else {
+		USART_TX_disable();  // Mensaje terminado, desactivamos interrupción
+	}
+}
+
 
 int main(void)
 {
